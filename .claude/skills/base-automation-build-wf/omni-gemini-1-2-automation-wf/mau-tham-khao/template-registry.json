@@ -1,0 +1,151 @@
+{
+  "_comment": "Kho canvas mẫu (golden templates) học từ các workflow trend đã hoàn thành. Agent CLONE canvas mẫu bằng create_canvas{clone_from_id}, rồi sửa prompt/tiêu đề. ID node giữ nguyên sau khi clone (đã kiểm chứng 19/11/2026).",
+  "handles": {
+    "imageInput.out": "image",
+    "videoInput.out": "video",
+    "generator.out": "output",
+    "gpt-image-2.5.in": "image_urls",
+    "image-generator.in": "image",
+    "video-generator.in.image": "image",
+    "video-generator.in.video (Gemini Omni)": "video",
+    "videoInput.out -> extract-audio.in": "input",
+    "video-generator.in.reference_video": "reference_video",
+    "extract-audio.out": "audio",
+    "edit-video.in": ["video", "audio", "image", "caption"],
+    "render.in": "video"
+  },
+  "models": {
+    "gpt-image-2.5-img2img": { "id": "6a2e70f191cb688031000014", "credits": 30, "mcp_run": false },
+    "nano-banana-2.1":       { "id": "6accb50113fc762ec7000d15", "credits": 10, "mcp_run": false },
+    "cingen-1.0-pro-image":  { "id": "6accb03d9190eb157b000ca3", "credits": 6,  "mcp_run": true },
+    "gemini-omni-1.2-flash": { "id": "6aee81f743f8ddf4b6000558", "credits": 160, "mcp_run": true,
+      "limits": { "max_images": 7, "max_videos": 1, "duration": "3s..15s (từng giây)", "aspect": ["9:16", "16:9"], "resolution": ["720p", "360p"] },
+      "rule": "3–5 ảnh input → BẮT BUỘC nối thêm 1 video gốc (handle 'video') làm tham chiếu + khối prompt '@Video 1'. 6–7 ảnh → không nối video." },
+    "kling-video-4.0":       { "id": "6ad36b15651383da8700012b", "credits": 6,  "mcp_run": true },
+    "kling-video-4.0-flash": { "id": "6aec5355ffc14ea4c9000d13", "credits": 10, "mcp_run": false },
+    "extract-audio":         { "id": "c82ad6252f60446eaa419988", "credits": 10, "mcp_run": true },
+    "editly-render":         { "id": "6dc80241247b2961703bf3fa", "credits": 10, "mcp_run": true }
+  },
+  "templates": {
+    "A7": {
+      "name": "Biến hình 1 nhân vật × 6 outfit, máy cố định, có vật che chuyển cảnh (cửa thang máy)",
+      "source_canvas": "6afdd91300cbbc47cc00025a",
+      "examples": ["Thời trang thang máy", "Outfit Tết"],
+      "duration": "15s", "aspect": "9:16",
+      "nodes": {
+        "character_input": "imageInput-1794297003189-0.20671806958736072",
+        "character_sheet": "image-generator-1794297010973-0.5826026512234799",
+        "image_slots_in_order": [
+          "image-generator-1794297010973-0.5826026512234799",
+          "imageInput-1794934249315-0.2450247191379008",
+          "imageInput-1794976811711-0.6364570530457696",
+          "imageInput-1794934256852-0.4614553926688242",
+          "imageInput-1794976822934-0.8651513015984074",
+          "imageInput-1794934256851-0.783543060603933",
+          "imageInput-1794988661838-0.8307623301481044"
+        ],
+        "video": "video-generator-1794975284288-0.13375215498995052",
+        "audio": "dynamicModel-1794991131588-yomz",
+        "edit": "edit-video-generator-1794991147162-0.8049788379771685",
+        "render": "render-1794991168971-hkf0gy",
+        "extra_inputs": ["imageInput-1795020467031-o7fx"]
+      },
+      "prompt_ref": "references/prompt-A-thang-may.md"
+    },
+    "D": {
+      "name": "Sản phẩm ecommerce: ảnh sản phẩm + logo → video reveal sản phẩm (clone A4 vì MCP không tạo được dynamicModel)",
+      "source_canvas": "6afddc8153b739002b0002bd",
+      "examples": ["Bắn cây dừa, rụng sản phẩm (TR-20261119-02)"],
+      "built_example_v1": "6afdf8bf56fe3557ce000091",
+      "nodes": {
+        "product_input": "imageInput-1794297003189-0.20671806958736072",
+        "product_clean": "image-generator-1794297010973-0.5826026512234799",
+        "logo_input": "imageInput-1794934249315-0.2450247191379008",
+        "unused_inputs": ["imageInput-1794934256852-0.4614553926688242", "imageInput-1794934256851-0.783543060603933"],
+        "video": "video-generator-1794934289276-0.06905405080276839",
+        "audio": "dynamicModel-1794938201047-ln0u",
+        "edit": "edit-video-generator-1794938217177-0.1696479820124771",
+        "render": "render-1794938284789-kzp8fs",
+        "added": ["prop-logo (CinGen)", "ref-trend-video (videoInput)", "thumbnail (CinGen)"]
+      }
+    },
+    "A4": {
+      "name": "Lookbook 1 nhân vật × 3 outfit trong bối cảnh đời sống (quán cafe…)",
+      "source_canvas": "6afddc8153b739002b0002bd",
+      "examples": ["Thời trang coffe"],
+      "duration": "15s", "aspect": "9:16",
+      "nodes": {
+        "character_input": "imageInput-1794297003189-0.20671806958736072",
+        "character_sheet": "image-generator-1794297010973-0.5826026512234799",
+        "image_slots_in_order": [
+          "image-generator-1794297010973-0.5826026512234799",
+          "imageInput-1794934249315-0.2450247191379008",
+          "imageInput-1794934256852-0.4614553926688242",
+          "imageInput-1794934256851-0.783543060603933"
+        ],
+        "video": "video-generator-1794934289276-0.06905405080276839",
+        "audio": "dynamicModel-1794938201047-ln0u",
+        "edit": "edit-video-generator-1794938217177-0.1696479820124771",
+        "render": "render-1794938284789-kzp8fs"
+      },
+      "prompt_ref": "references/prompt-A-coffee-lookbook.md"
+    },
+    "B": {
+      "name": "Chuỗi keyframe: mặc đồ lên nhân vật → ghép nền/hiệu ứng → video xoay 360 đổi look",
+      "source_canvas": "6afc02c73f5bcbd830000365",
+      "examples": ["Biến hình pantone"],
+      "duration": "10s", "aspect": "9:16",
+      "nodes": {
+        "character_input": "imageInput-1793073149667-0.2125520827719457",
+        "background_input": "imageInput-1793077346743-0.901662954779797",
+        "dress_up_generators": [
+          "image-generator-1793074191161-0.07667995394388494",
+          "image-generator-1793074473951-0.9987596333837946",
+          "image-generator-1793074496651-0.4478869173519052",
+          "image-generator-1793074665066-0.15275315753560437",
+          "image-generator-1793074729566-0.5093689901778115"
+        ],
+        "styled_keyframes": [
+          "image-generator-1793081256633-0.41667259054468575",
+          "image-generator-1793081505235-0.48604046509952115",
+          "image-generator-1793081563600-0.2523659076973406",
+          "image-generator-1793081588681-0.07258206820169322",
+          "image-generator-1793081597031-0.8766904745731151"
+        ],
+        "video": "video-generator-1793085326825-0.1406104028458437",
+        "video_alt": "video-generator-1794900779834-0-98431"
+      },
+      "prompt_ref": "references/prompt-B-pantone-spin.md"
+    },
+    "C": {
+      "name": "Giữ nguyên video trend gốc, thay quần áo/yếu tố bằng ảnh tham chiếu (edit-video)",
+      "source_canvas": "6afd6ec24a7f7b0d78000a34",
+      "examples": ["Korean fashion style", "Reup video"],
+      "duration": "= video gốc (≤10s/đoạn)", "aspect": "auto",
+      "nodes": {
+        "character_input": "imageInput-1794297003189-0.20671806958736072",
+        "character_sheet": "image-generator-1794297010973-0.5826026512234799",
+        "outfit_inputs": [
+          "imageInput-1794297126110-0.7472931214401951",
+          "imageInput-1794297126110-0.7501981103510501",
+          "imageInput-1794297126110-0.9874017690146848",
+          "imageInput-1794297126110-0.6351756004350879",
+          "imageInput-1794297126109-0.006242049812547057",
+          "imageInput-1794297126110-0.1739754783841646"
+        ],
+        "dress_up_generators": [
+          "image-generator-1794297153327-0.8815672041481931",
+          "image-generator-1794297186168-0-905987",
+          "image-generator-1794297187518-0-938748",
+          "image-generator-1794297188985-0-148882",
+          "image-generator-1794297192626-0-134757",
+          "image-generator-1794297193930-0-718915"
+        ],
+        "trend_video_input": "videoInput-1794297646268-0.33750345719427566",
+        "video_switch": "videoSwitch-1794297621664-0.16997584326289816",
+        "video": "video-generator-mwaekiq4gyc5"
+      },
+      "prompt_ref": "references/prompt-C-replace-video.md"
+    }
+  }
+}

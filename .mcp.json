@@ -1,0 +1,32 @@
+{
+  "mcpServers": {
+    "cinai": {
+      "type": "http",
+      "url": "${CINAI_MCP_URL}",
+      "headers": {
+        "Authorization": "Bearer ${CINAI_API_KEY}"
+      }
+    },
+    "lark": {
+      "command": "npx",
+      "args": ["-y", "@larksuiteoapi/lark-mcp", "mcp", "-a", "${LARK_APP_ID}", "-s", "${LARK_APP_SECRET}"]
+    },
+    "n8n": {
+      "command": "npx",
+      "args": ["-y", "n8n-mcp"],
+      "env": {
+        "MCP_MODE": "stdio",
+        "LOG_LEVEL": "error",
+        "N8N_API_URL": "${N8N_API_URL}",
+        "N8N_API_KEY": "${N8N_API_KEY}"
+      }
+    },
+    "firecrawl": {
+      "command": "npx",
+      "args": ["-y", "firecrawl-mcp"],
+      "env": {
+        "FIRECRAWL_API_KEY": "${FIRECRAWL_API_KEY}"
+      }
+    }
+  }
+}

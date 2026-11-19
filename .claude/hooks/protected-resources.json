@@ -1,0 +1,23 @@
+{
+  "_comment": "Tài nguyên production được bảo vệ. guard-prod.js chặn mọi tool call có chứa các chuỗi này. Bổ sung ID account/Page live vào đây.",
+  "protected_paths": [
+    "/opt/flow-agent/flow-agent.js",
+    "/opt/flow-agent/flow-generate.js",
+    "/opt/flow-chrome-launch.sh",
+    "/opt/openclaw-router/router.mjs",
+    "/etc/nginx/"
+  ],
+  "live_account_ids": [],
+  "live_page_ids": [],
+  "live_bitable_app_tokens": [],
+  "publish_tool_patterns": [
+    "publish",
+    "post_create",
+    "upload_video",
+    "schedule_post"
+  ],
+  "dangerous_flags": [
+    "--load-extension",
+    "maxConcurrent"
+  ]
+}

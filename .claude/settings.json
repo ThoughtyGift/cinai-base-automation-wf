@@ -1,0 +1,94 @@
+﻿{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Read",
+      "Edit(./docs/**)",
+      "Edit(./output/**)",
+      "Bash(node .claude/hooks/*)",
+      "Bash(node tools/cinai.mjs:*)",
+      "Bash(node tools/trend_video.mjs:*)",
+      "Bash(node tools/trend_media.mjs:*)",
+      "Bash(node tools/layout_project.mjs:*)",
+      "Bash(node tools/label_project.mjs:*)",
+      "Bash(node tools/fix_edit_intro.mjs:*)",
+      "Bash(node tools/lark_tasks.mjs list:*)",
+      "Bash(node tools/lark_tasks.mjs inbox:*)",
+      "Bash(node tools/compare_output.mjs:*)",
+      "Edit(./inbox/**)",
+      "Edit(./outbox/**)",
+      "Bash(git status)",
+      "Bash(git diff:*)",
+      "mcp__firecrawl__*",
+      "mcp__lark__bitable_v1_appTableRecord_search",
+      "mcp__lark__bitable_v1_appTableField_list",
+      "mcp__cinai__whoami",
+      "mcp__cinai__list_models",
+      "mcp__cinai__get_model",
+      "mcp__cinai__estimate_cost",
+      "mcp__cinai__list_skills",
+      "mcp__cinai__get_skill",
+      "mcp__cinai__get_job",
+      "mcp__cinai__get_task",
+      "mcp__cinai__list_tasks",
+      "mcp__cinai__list_canvases",
+      "mcp__cinai__open_canvas",
+      "mcp__cinai__get_canvas_state",
+      "mcp__cinai__get_canvas_node_details",
+      "mcp__cinai__list_3d_worlds",
+      "mcp__cinai__open_3d_world",
+      "mcp__cinai__upload_file",
+      "mcp__cinai__create_canvas",
+      "mcp__cinai__create_canvas_node",
+      "mcp__cinai__update_canvas_node",
+      "mcp__cinai__connect_canvas_nodes",
+      "mcp__cinai__disconnect_canvas_nodes",
+      "mcp__cinai__organize_canvas_layout",
+      "mcp__cinai__compose_canvas_workflow",
+      "mcp__cinai__configure_canvas_app",
+      "mcp__cinai__create_3d_world",
+      "mcp__cinai__update_3d_scene",
+      "mcp__cinai__answer_question",
+      "mcp__cinai__cancel_task"
+    ],
+    "ask": [
+      "mcp__cinai__generate",
+      "mcp__cinai__run_canvas_node",
+      "mcp__cinai__start_task",
+      "mcp__cinai__delete_canvas_nodes",
+      "mcp__lark__bitable_v1_appTableRecord_create",
+      "mcp__lark__bitable_v1_appTableRecord_update",
+      "mcp__lark__im_v1_message_create",
+      "mcp__n8n__*"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Bash(rm -rf:*)",
+      "Bash(git push --force:*)",
+      "Bash(ssh:*)",
+      "Edit(/opt/**)"
+    ]
+  },
+  "env": {
+    "PIPELINE_ENV": "test"
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|Edit|Write|mcp__.*",
+        "hooks": [
+          { "type": "command", "command": "node .claude/hooks/guard-prod.js", "timeout": 10 }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "mcp__cinai__.*",
+        "hooks": [
+          { "type": "command", "command": "node .claude/hooks/log-jobs.js", "timeout": 10 }
+        ]
+      }
+    ]
+  }
+}

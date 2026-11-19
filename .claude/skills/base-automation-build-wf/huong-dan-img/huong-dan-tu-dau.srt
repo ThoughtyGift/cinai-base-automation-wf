@@ -1,0 +1,23 @@
+1
+00:00:00,000 --> 00:00:05,000
+Bước 1: Mở Antigravity (trái) chọn thư mục Socalmedia, gõ /lam-task-lark
+
+2
+00:00:05,000 --> 00:00:10,000
+Bước 2: Mở link CinAI – Kéo goc.mp4 vào VIDEO GỐC, upload ảnh, chạy 2 node 0 credit
+
+3
+00:00:10,000 --> 00:00:15,000
+Bước 3: Nhờ AI tạo bộ ảnh test mẫu bằng CinGen (nếu chưa có ảnh sẵn)
+
+4
+00:00:15,000 --> 00:00:20,000
+Bước 4: Chạy build_edit_json.mjs → F5 Reload web → Open Editor → Export 9:16
+
+5
+00:00:20,000 --> 00:00:25,000
+Bước 5: Chạy /so-sanh-video L062 kiểm tra ảnh đối chiếu side_by_side.jpg
+
+6
+00:00:25,000 --> 00:00:30,000
+Bước 6: Chọn bản thắng làm App → Make App → Publish → Dán link về Lark

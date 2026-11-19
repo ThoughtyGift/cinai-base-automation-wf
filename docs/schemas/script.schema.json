@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Video Script",
+  "type": "object",
+  "required": ["brief_id", "duration_s", "aspect", "language", "scenes", "cta"],
+  "properties": {
+    "brief_id": { "type": "string" },
+    "duration_s": { "type": "number", "minimum": 5, "maximum": 180 },
+    "aspect": { "enum": ["9:16", "1:1", "16:9", "4:5"] },
+    "language": { "type": "string" },
+    "scenes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["idx", "beat", "duration_s", "visual_prompt"],
+        "properties": {
+          "idx": { "type": "integer" },
+          "beat": { "enum": ["hook", "problem", "turn", "proof", "signature", "cta"] },
+          "duration_s": { "type": "number" },
+          "visual_prompt": { "type": "string" },
+          "camera": { "type": "string" },
+          "voiceover": { "type": "string" },
+          "text_overlay": { "type": "string", "maxLength": 60 },
+          "refs": { "type": "array", "items": { "enum": ["character_sheet", "product_lock"] } }
+        }
+      }
+    },
+    "cta": { "type": "string" }
+  }
+}

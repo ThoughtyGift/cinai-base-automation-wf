@@ -1,0 +1,15 @@
+{
+  "name": "cinai-base-automation-wf",
+  "displayName": "CinAI Base Automation WF",
+  "version": "1.0.0",
+  "description": "Tự động đọc task từ Lark Base / Google Sheet, phân tích video/ảnh trend, dựng workflow 3 biến thể V1–V3 + Creative Intro + Editly 9:16 2-track trên cinai.tv, tạo Title Design Thumbnail và Publish Share Template.",
+  "logo": "assets/logo.svg",
+  "author": {
+    "name": "Socalmedia Team"
+  },
+  "suggestedPrompts": [
+    "Chạy auto các task 60-70 trên Lark: dựng WF V1-V3, Creative Intro, Edit 9:16, Title Design và Publish Share Template",
+    "Dựng workflow cho task L062 từ Lark và chạy so sánh side_by_side.jpg với video gốc",
+    "Kiểm tra kết nối CinAI, Google Drive / Lark Base và tạo bảng mẫu 12 cột từ inbox/lark_template.csv"
+  ]
+}

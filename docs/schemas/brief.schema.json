@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Content Brief",
+  "type": "object",
+  "required": ["brief_id", "idea_id", "channel_id", "product_lock_text", "audience", "angles"],
+  "properties": {
+    "brief_id": { "type": "string" },
+    "idea_id": { "type": "string" },
+    "channel_id": { "type": "string" },
+    "parent_post_id": { "type": ["string", "null"] },
+    "product_lock_text": { "type": "string" },
+    "product_ref_urls": { "type": "array", "items": { "type": "string", "format": "uri" } },
+    "audience": {
+      "type": "object",
+      "required": ["who", "pains"],
+      "properties": {
+        "who": { "type": "string" },
+        "pains": { "type": "array", "items": { "type": "string" } },
+        "desires": { "type": "array", "items": { "type": "string" } },
+        "objections": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "angles": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "required": ["name", "hooks", "cta"],
+        "properties": {
+          "name": { "type": "string" },
+          "hooks": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+          "cta": { "type": "string" },
+          "duration_s": { "type": "number" },
+          "platforms": { "type": "array", "items": { "enum": ["tiktok", "facebook", "instagram", "youtube"] } }
+        }
+      }
+    },
+    "assumptions": { "type": "array", "items": { "type": "string" } }
+  }
+}
